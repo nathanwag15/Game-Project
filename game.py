@@ -53,45 +53,89 @@ class Roulette:
         self.chips = chips
         self.money = money
         self.bet_list = []
+        
     
     def make_a_bet(self):
-        bet = {}
         position = input("Would you like to make a inside bet or outside bet? ")
         position = position.lower()
         if position == "inside":
-            number_of_chips = input("You can make a minimum of $1 in chips per bet. How many chips would you like to place on this bet? " )
-            specific_bet = input("What would you like to bet on? ")
-            specific_bet = self.list_maker(specific_bet)
+            number_of_chips = self.inside_chips()
+            specific_bet = self.inside_bet()
         elif position == "outside":
-            number_of_chips = input("You can make a minimum of $5 in chips per bet. How many chips would you like to place on this bet? ")
-            if number_of_chips < '5':
-                number_of_chips = input("You need to have more than $5 worth in chips to bet outside. How many chips would you like to place on this bet? ") 
-                specific_bet = input("What would you like to bet on? ")
-            else:
-                specific_bet = input("What would you like to bet on? ")
+            number_of_chips = self.outside_chips()
+            specific_bet = self.outside_bet()
         else:
             print("That is not a valid entry")
             self.make_a_bet()
 
         number_of_chips = int(number_of_chips)
-
-        if self.chips < number_of_chips:
-            print("You do not have enough chips to make that bet")
-            self.buy_determine()
+        print(specific_bet10)
+        self.chip_checker(number_of_chips)        
+        self.chip_subtracter(number_of_chips)
+        self.bet_list_maker(number_of_chips, specific_bet)
+        self.redo()
         
-        self.chips -= number_of_chips
+
+    def bet_list_maker(self, number_of_chips, specific_bet):
+        bet = {}
         bet[number_of_chips] = specific_bet
         self.bet_list.append(bet)
 
+    def chip_subtracter(self, number_of_chips):
+        self.chips -= number_of_chips
+
+    def chip_checker(self, number_of_chips):
+        if self.chips < number_of_chips:
+            print("You do not have enough chips to make that bet")
+            self.buy_determine()
+
+    def inside_chips(self):
+        number_of_chips = input("You can make a minimum of $1 in chips per bet. How many chips would you like to place on this bet? " )
+        number_of_chips_list = self.list_maker(number_of_chips)
+        number_of_chips = int(number_of_chips)
+        if len(number_of_chips_list) > 1:
+            print("That is an invalid entry")
+            self.inside_chips()      
+        return number_of_chips
+
+    def inside_bet(self):
+        specific_bet = input("What would you like to bet on? ")
+        specific_bet = self.list_maker(specific_bet)
+        return specific_bet
+
+    def outside_chips(self):
+        number_of_chips = input("You can make a minimum of $5 in chips per bet. How many chips would you like to place on this bet? ")
+        number_of_chips_list = self.list_maker(number_of_chips)
+        number_of_chips = int(number_of_chips)
+        if len(number_of_chips_list) > 1:
+            print("That is an invalid entry")
+            self.inside_chips()
+        elif number_of_chips < 5:
+            print("That is not enough chips for a outside bet")
+            self.outside_chips()
+        return number_of_chips
+    
+    def outside_bet(self):
+        specific_bet = input("What would you like to bet on? ")
+        specific_bet = specific_bet.lower()
+        if specific_bet == "red" or specific_bet == "black" or specific_bet == "odd" or specific_bet == "even" or specific_bet == "first half" or specific_bet == "last half" or specific_bet == "first 12" or specific_bet == "second 12" or specific_bet == "third 12":
+            return specific_bet
+        elif specific_bet != "red" or specific_bet != "black" or specific_bet != "odd" or specific_bet != "even" or specific_bet != "first half" or specific_bet != "last half" or specific_bet != "first 12" or specific_bet != "second 12" or specific_bet != "third 12":
+            print("That is not a vald entry you can say red or black or odd or even or first half or last half or first 12 or second 12 or third 12")
+            self.outside_bet()
+
+    def redo(self):
         retry = input("would you like to add another bet? ")
         redo = retry.lower()
         if redo == "yes":
             self.make_a_bet()
-            self.get_chips()
-        else:
+        elif redo =="no":
             print("Ok this is your bet")
             print(self.bet_list)
-            
+        else:
+            print("That is a invalid entry")
+            self.redo()
+
 
     def board(self):
         im = Image.open("image.jpg")
@@ -131,10 +175,17 @@ class Roulette:
         return string
         
 
+    def find_win(self):
+        for bet in self.bet_list:
+            print(bet)
 
 print(randomGenerator())
 round = Roulette(100, 0)
 
+round.board()
+
 round.buy_chips()
 round.make_a_bet()
 
+round.find_win()
+round.board()
