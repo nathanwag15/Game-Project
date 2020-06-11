@@ -1,0 +1,44 @@
+We are building a casino!
+You are to build one casino game, black jack, slots, roulette, etc, ( these are the ones I have seen built out before.)
+
+Requirements:
+-Build the game.
+-The player will have a wallet, they can add money to the wallet, any winnings they get will be added to the wallet.
+-If the wallet goes empty they must add more money or they have to stop playing.
+-They need to be able to stop playing and cash out the wallet at anytime. (bonus if the cash out proccess tells them if they made a profit or not)
+-let the player set the dollar/cents amount of the bet (in the game).
+-let them continue playing as long as they have money or decide to cash out.
+
+-Make a git repository for the project.
+-Push a new commit up to github each day.
+
+
+development Plan: 
+Roulette
+
+bets: 
+
+Inside: you can spread all of your 5 dollars 
+-if you bet on a single number then it pays 30 to 1. 
+-you can bet on two numbers at one time by putting the chip in the middle. (split bet) pays 17 to 1
+-corner bet takes 4 bets at a time and it pays 8 to 1
+street bet three numbers in a row and the wager is placed at the end of the row. 
+
+Outside: each bet is worth 5 dollars
+- red or black (even money return)
+- odd or even will pay (even money)
+- first half or last half pays (even money)
+- 12 numbers at a time will pay 2 to 1
+
+
+player initial monetary value = 100
+
+chip value is 1$ each 
+
+player story
+
+steve: 
+
+steve buys 10 chips for 10$
+
+he puts 2 chips on four adjacent numbers 

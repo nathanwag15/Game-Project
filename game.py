@@ -13,7 +13,7 @@ class Roulette:
         
     
     def make_a_bet(self):
-        position = input("Would you like to make a inside bet or outside bet? ")
+        position = input("\nWould you like to make a inside bet or outside bet? ")
         position = position.lower()
         if position == "inside":
             number_of_chips = self.inside_chips()
@@ -22,7 +22,7 @@ class Roulette:
             number_of_chips = self.outside_chips()
             specific_bet = self.outside_bet()
         else:
-            print("That is not a valid entry")
+            print("\nThat is not a valid entry\n")
             self.make_a_bet()
 
         number_of_chips = int(number_of_chips)
@@ -43,48 +43,48 @@ class Roulette:
 
     def chip_checker(self, number_of_chips):
         if self.chips < number_of_chips:
-            print("You do not have enough chips to make that bet")
+            print("\nYou do not have enough chips to make that bet\n")
             self.buy_determine()
 
     def inside_chips(self):
-        number_of_chips = input("You can make a minimum of $1 in chips per bet. How many chips would you like to place on this bet? " )
+        number_of_chips = input("\nYou can make a minimum of $1 in chips per bet. How many chips would you like to place on this bet? " )
         number_of_chips_list = self.list_maker(number_of_chips)
         if len(number_of_chips_list) > 1:
-            print("That is an invalid entry")
+            print("\nThat is an invalid entry\n")
             number_of_chips = self.inside_chips()      
         number_of_chips = int(number_of_chips)
         return number_of_chips
 
     def inside_bet(self):
-        specific_bet = input("What would you like to bet on? ")
+        specific_bet = input("\nWhat would you like to bet on? ")
         specific_bet = self.list_maker(specific_bet)
         return specific_bet
 
     def outside_chips(self):
-        number_of_chips = input("You can make a minimum of $5 in chips per bet. How many chips would you like to place on this bet? ")
+        number_of_chips = input("\nYou can make a minimum of $5 in chips per bet. How many chips would you like to place on this bet? ")
         number_of_chips_list = self.list_maker(number_of_chips)
         number_of_chips = int(number_of_chips)
         if len(number_of_chips_list) > 1:
-            print("That is an invalid entry")
+            print("\nThat is an invalid entry\n")
             number_of_chips = self.inside_chips()
         elif number_of_chips < 5:
-            print("That is not enough chips for a outside bet")
+            print("\nThat is not enough chips for a outside bet\n")
             self.outside_chips()
         return number_of_chips
     
     def outside_bet(self):
-        specific_bet = input("What would you like to bet on? ")
+        specific_bet = input("\nWhat would you like to bet on? ")
         specific_bet = specific_bet.lower()
         
         if specific_bet == "red" or specific_bet == "black" or specific_bet == "odd" or specific_bet == "even" or specific_bet == "first half" or specific_bet == "last half" or specific_bet == "first 12" or specific_bet == "second 12" or specific_bet == "third 12":
             return specific_bet
         elif specific_bet != "red" or specific_bet != "black" or specific_bet != "odd" or specific_bet != "even" or specific_bet != "first half" or specific_bet != "last half" or specific_bet != "first 12" or specific_bet != "second 12" or specific_bet != "third 12":
-            print("That is not a vald entry you can say red or black or odd or even or first half or last half or first 12 or second 12 or third 12")
+            print("\nThat is not a vald entry you can say red or black or odd or even or first half or last half or first 12 or second 12 or third 12\n")
             self.make_a_bet()
        
 
     def redo(self):
-        retry = input("would you like to add another bet? ")
+        retry = input("\nwould you like to add another bet? ")
         redo = retry.lower()
         if redo == "yes":
             self.make_a_bet()
@@ -102,30 +102,30 @@ class Roulette:
         im.show()
     
     def buy_chips(self):
-        self.chips = int(input(f"Each chip is worth 1$ at our casino how many chips would you like to buy? You currently have ${self.money}: "))
+        self.chips = int(input(f"\nEach chip is worth 1$ at our casino how many chips would you like to buy? You currently have ${self.money}: "))
         self.money -= self.chips
         self.get_money()
 
     def get_money(self):
-        print(f"You currently have ${self.money}")
+        print(f"\nYou currently have ${self.money}")
     
     def get_chips(self):
-        print(f"You currently have {self.chips} chips")
+        print(f"\nYou currently have {self.chips} chips")
 
     def buy_determine(self):
-        buy = input("Would you like to buy some chips? ")
+        buy = input("\nWould you like to buy some chips? ")
         buy = str(buy)
         if buy == "yes":
             self.buy_chips()
             self.make_a_bet()
         elif buy == "no":
-            still_bet = input("Would you like to still make a bet?")
+            still_bet = input("\nWould you like to still make a bet?")
             if still_bet == "yes":
                 self.make_a_bet()
             else:
                 print("Ok")
         else:
-            print("that is not a valid entry")
+            print("\nthat is not a valid entry")
             self.buy_determine()
 
     def list_maker(self, string):
@@ -167,7 +167,8 @@ class Roulette:
                     if values == "third 12":
                         self.winning_calculator_dozen(chips)
                 else:
-                    print("You Didn't Win Better Luck next time")
+                    print("\nYou Didn't Win Better Luck next time")
+                    
         self.spin_again()
     
     def spin_again(self):
